@@ -1,0 +1,33 @@
+version: '3.2'
+services:
+  database:
+    image: 'postgres:11'
+    restart: always
+    ports:
+      - '15333:5432'
+    environment:
+      POSTGRES_DB: fleetapp
+      POSTGRES_USER: fleetapp
+      POSTGRES_PASSWORD: password
+    volumes:
+      - 'db_data:/var/lib/postgresql/fleetapp'
+
+  fleet-app:
+    build: .
+    depends_on:
+      - database
+    env_file: ./docker.env
+    environment:
+      DATABASE_URL: postgres://fleetapp:password@db:5432/fleetapp
+      NODE_ENV: development
+      PORT: 3000
+    ports:
+      - "3000:3000"
+    command: npm run dev
+    volumes:
+      - .:/fleetapp/
+      - /fleetapp/node_modules
+
+volumes:
+  db_data:
+    driver: local
