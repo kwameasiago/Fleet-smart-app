@@ -1,11 +1,12 @@
 import express from 'express';
 import Services from '../services/services';
+import {accessControl} from '../services/utils'
 
 const serviceRouter = express.Router();
 const {createService, assignUsers, markAsComplete} = new Services()
 
 
-serviceRouter.post('/',async (req, res) => {
+serviceRouter.post('/',accessControl('create service request'),async (req, res) => {
     try {
         const {body} = req;
         const data = await createService(body);
@@ -20,7 +21,7 @@ serviceRouter.post('/',async (req, res) => {
     }
 });
 
-serviceRouter.post('/users',async (req, res) => {
+serviceRouter.post('/users',accessControl('add reviewers'),async (req, res) => {
     try {
         const {body} = req;
         const data = await assignUsers(body);
@@ -35,7 +36,7 @@ serviceRouter.post('/users',async (req, res) => {
     }
 });
 
-serviceRouter.put('/users',async (req, res) => {
+serviceRouter.put('/users',accessControl('approve servce request'),async (req, res) => {
     try {
         const {body} = req;
         const data = await markAsComplete(body);

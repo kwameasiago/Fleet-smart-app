@@ -1,13 +1,13 @@
 import express from 'express';
 import Machines from '../services/machines';
-
+import {accessControl} from '../services/utils'
 const machineRoute = express.Router();
 
 const {createMachines, getMachines, getMachine, addParts} = new Machines();
 
 
 
-machineRoute.post('/',async (req, res) => {
+machineRoute.post('/',  accessControl('create machine/auto mobiles'),async (req, res) => {
     try {
         const {body} = req;
         const data = await createMachines(body);
@@ -21,7 +21,7 @@ machineRoute.post('/',async (req, res) => {
     }
 });
 
-machineRoute.get('/', async (req, res) => {
+machineRoute.get('/', accessControl('view machines'), async (req, res) => {
     try {
         const data = await getMachines();
         res.status(200).send(data)
@@ -34,7 +34,7 @@ machineRoute.get('/', async (req, res) => {
 });
 
 
-machineRoute.get('/:machineId', async (req, res) => {
+machineRoute.get('/:machineId', accessControl('view machines'),async (req, res) => {
     try {
         const {params: {machineId}} = req;
         const data = await getMachine(machineId);
@@ -48,7 +48,7 @@ machineRoute.get('/:machineId', async (req, res) => {
 });
 
 
-machineRoute.post('/parts',async (req, res) => {
+machineRoute.post('/parts',accessControl('view parts'),async (req, res) => {
     try {
         const {body} = req;
         const data = await addParts(body);

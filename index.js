@@ -4,7 +4,7 @@ import userRoute from "./controller/auth.js";
 import aimRoute from './controller/aim.js';
 import machineRoute from './controller/machines.js';
 import serviceRouter from './controller/services.js';
-import {isAuthenticated} from './services/utils'
+import {isAuthenticated, accessControl} from './services/utils'
 import db from './models/index.js';
 import cors from 'cors';
 

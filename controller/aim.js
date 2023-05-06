@@ -1,6 +1,6 @@
 import express from 'express';
 import Aim from '../services/aim';
-import {isAuthenticated} from '../services/utils';
+import {isAuthenticated, accessControl} from '../services/utils';
 
 const aimRoute = express.Router();
 const {
@@ -43,7 +43,7 @@ aimRoute.post('/authenticate', async (req, res) => {
 });
 
 
-aimRoute.get('/user/:userId', isAuthenticated, async (req, res) => {
+aimRoute.get('/user/:userId', isAuthenticated,  accessControl('view user'),async (req, res) => {
     const {params:{userId}} = req;
     try {
         const data = await getUser(userId)
@@ -56,7 +56,7 @@ aimRoute.get('/user/:userId', isAuthenticated, async (req, res) => {
     }
 })
 
-aimRoute.post('/account', isAuthenticated, async (req, res) => {
+aimRoute.post('/account', isAuthenticated,  accessControl('create account'),async (req, res) => {
     const {body:{name, description}} = req;
     try {
         const data = await createAccount(name, description)
@@ -70,7 +70,7 @@ aimRoute.post('/account', isAuthenticated, async (req, res) => {
 })
 
 
-aimRoute.get('/account', isAuthenticated,async (req, res) => {
+aimRoute.get('/account', isAuthenticated,  accessControl('view account'),async (req, res) => {
     const {body:{name, description}} = req;
     try {
         const data = await getAccounts(name, description)
@@ -84,7 +84,7 @@ aimRoute.get('/account', isAuthenticated,async (req, res) => {
 });
 
 
-aimRoute.put('/account', isAuthenticated,async (req, res) => {
+aimRoute.put('/account', isAuthenticated,  accessControl('access control'),async (req, res) => {
     const {body:{status, accountType, accountDefinitions}} = req;
     try {
         const data = await updateAccessControl({status, accountType, accountDefinitions})
@@ -99,7 +99,7 @@ aimRoute.put('/account', isAuthenticated,async (req, res) => {
 });
 
 
-aimRoute.post('/user', isAuthenticated,async (req, res) => {
+aimRoute.post('/user', isAuthenticated,  accessControl('create user'),async (req, res) => {
     const {body} = req;
     try {
         const data = await createUser(body)
@@ -113,7 +113,7 @@ aimRoute.post('/user', isAuthenticated,async (req, res) => {
     }
 });
 
-aimRoute.get('/user', isAuthenticated ,async (req, res) => {
+aimRoute.get('/user', isAuthenticated , accessControl('view user'),async (req, res) => {
     try {
         const data = await getUsers()
         res.status(200).send({data})

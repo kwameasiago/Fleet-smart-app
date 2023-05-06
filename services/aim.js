@@ -10,14 +10,29 @@ const accountDefinitionsdefinitions = [
         description: 'users can create an account'
     },
     {
-        name: 'add user',
+        name: 'create user',
         group: 'aim',
         description: 'users can add other users'
+    },
+    {
+        name: 'view user',
+        group: 'aim',
+        description: 'users can view other users'
+    },
+    {
+        name: 'view account',
+        group: 'aim',
+        description: 'users can view other users'
     },
     {
         name: 'access control',
         group: 'aim',
         description: 'users change account access control'
+    },
+    {
+        name: 'view machines',
+        group: 'aim',
+        description: 'users can view other users'
     },
     {
         name: 'create machine/auto mobiles',
@@ -30,9 +45,19 @@ const accountDefinitionsdefinitions = [
         description: 'users can create parts for auto mobiles'
     },
     {
-        name: 'service request',
+        name: 'create service request',
         group: 'services',
         description: 'users can request services for products '
+    },
+    {
+        name: 'add reviewers',
+        group: 'services',
+        description: 'users can add service request reviews '
+    },
+    {
+        name: 'approve servce request',
+        group: 'services',
+        description: 'users can add service request reviews '
     },
 ]
 
@@ -113,12 +138,12 @@ class Aim {
             if(!user){
                 return {token: '', error: 'invalide credentials'}
             }
-            const {dataValues:{password, firstName, lastName, email:useEmail}} = user
+            const {dataValues:{password, firstName, lastName, email:userEmail}} = user
 
             let compare  = await bcrypt.compare(plainPassword, password);
             let token;
             if(compare){
-                token = {token: await jsonwebtoken.sign({ firstName, lastName, useEmail}, process.env.SECRET_KEY, { expiresIn: '7d' })}
+                token = {token: await jsonwebtoken.sign({ firstName, lastName, email:userEmail}, process.env.SECRET_KEY, { expiresIn: '7d' })}
             }else{
                 
                 token = {token: '', error: 'invalide credentials'}
