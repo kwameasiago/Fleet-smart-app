@@ -1,14 +1,14 @@
-FROM node:10
+FROM node:18
 
-WORKDIR /app
+WORKDIR ./auth
 
 COPY package.json .
-COPY package-lock.json .
+# COPY package-lock.json .
 
 RUN npm install
 
 COPY . .
 
-EXPOSE 3000
+EXPOSE 3031
 
 CMD npm start

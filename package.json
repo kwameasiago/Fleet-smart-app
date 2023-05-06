@@ -1,28 +1,38 @@
 {
-  "name": "fleet-smart-app",
+  "name": "fleet",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",  
-    "dev": "nodemon index.js"
+    "dev": "nodemon --exec babel-node index.js",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kwameasiago/Fleet-smart-app.git"
+    "url": "git+https://github.com/kwameasiago/fleet.git"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kwameasiago/Fleet-smart-app/issues"
+    "url": "https://github.com/kwameasiago/auth/issues"
   },
-  "homepage": "https://github.com/kwameasiago/Fleet-smart-app#readme",
+  "homepage": "https://github.com/kwameasiago/auth#readme",
   "dependencies": {
+    "@babel/core": "^7.20.12",
+    "@babel/node": "^7.20.7",
+    "@babel/preset-env": "^7.20.2",
+    "bcrypt": "^5.1.0",
+    "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
-    "nodemon": "^2.0.20",
-    "sequelize": "^6.25.3"
+    "jsonwebtoken": "^9.0.0",
+    "pg": "^8.8.0",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.28.0",
+    "sequelize-cli": "^6.5.2"
   },
   "devDependencies": {
-    "sequelize-cli": "^6.5.2"
+    "nodemon": "^2.0.20"
   }
 }
