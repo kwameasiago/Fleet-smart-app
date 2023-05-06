@@ -3,7 +3,7 @@ import jsonwebtoken from 'jsonwebtoken';
 import db from '../models';
 
 const activationKey = process.env.ACTIVATION_KEY || 'secret';
-const definitions = [
+const accountDefinitionsdefinitions = [
     {
         name: 'create account',
         group: 'aim',
@@ -124,6 +124,49 @@ class Aim {
                 attributes: {exclude: ['password']},
             });
             return user
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async createAccount(name, description) {
+        try {
+            let res = [];
+            const {id:accountId} = await db.Accounts.create({
+                name, description
+            });
+            const accessDef = await db.AccessDefinitions.findAll();
+            accessDef.forEach(({id:definitionId}) => {
+                res.push({accountId, definitionId, status: false})
+            })
+            await db.AccessControl.bulkCreate(res)
+            return {name, description}
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getAccounts(){
+        try {
+            const accounts = await db.Accounts.findAll({ 
+                include: { all: true, nested: true }, 
+            });
+            return accounts
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async updateAccessControl({status, accountType, accountDefinitions}){
+        try {
+            const access = await db.AccessControl.update({
+                status,
+            }, {where: {
+                definitionId: accountDefinitions,
+                accountId: accountType
+
+            }});
+            return access
         } catch (error) {
             throw error
         }
