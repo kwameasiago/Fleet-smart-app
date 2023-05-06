@@ -32,6 +32,15 @@ class Machines {
             throw error
         }
     }
+
+    async addParts(data){
+        try {
+            const parts = await db.Parts.create(data);
+            return parts
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export default Machines;
