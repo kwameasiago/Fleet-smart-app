@@ -9,7 +9,6 @@ const { register, login, userInfo } = auth;
 userRoute.post('/signup', async (req, res) => {
     const {body} = req;
     const data = await  register(body);
-    console.log(data)
     res.status(200).send({
         ...data
     })

@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyparser from 'body-parser'
 import userRoute from "./controller/auth.js";
+import aimRoute from './controller/aim.js';
 import db from './models/index.js';
 import cors from 'cors';
 
@@ -18,6 +19,8 @@ if(process.env.NODE_ENV === 'development'){
 app.use(bodyparser.json());
 app.use(bodyparser.urlencoded({ extended: false }));
 app.use('/auth', userRoute);
+
+app.use('/aim', aimRoute)
 
 app.use((req, res) => {
     res.status(404).send({

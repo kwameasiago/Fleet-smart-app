@@ -3,7 +3,7 @@
 import {Model} from 'sequelize';
 
 export default (sequelize, DataTypes) => {
-  class AccessDefinations extends Model {
+  class AccessDefinitions extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,16 +11,20 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      AccessDefinations.hasMany(models.AccessControl, {foreignKey: 'definationId'});
+      AccessDefinitions.hasMany(models.AccessControl, {foreignKey: 'definitionId'});
     }
   }
-  AccessDefinations.init({
+  AccessDefinitions.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    isDelete: DataTypes.BOOLEAN
+    group: DataTypes.STRING,
+    isDelete: {
+      type:DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
-    modelName: 'AccessDefinations',
+    modelName: 'AccessDefinitions',
   });
-  return AccessDefinations;
+  return AccessDefinitions;
 };

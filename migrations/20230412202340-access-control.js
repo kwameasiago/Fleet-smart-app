@@ -17,11 +17,11 @@ export default {
             key: 'id'
         }
       },
-      definationId: {
+      definitionId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
-            model: 'AccessDefinations',
+            model: 'AccessDefinitions',
             key: 'id'
         }
       },

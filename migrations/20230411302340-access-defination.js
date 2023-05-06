@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('AccessDefinations', {
+    await queryInterface.createTable('AccessDefinitions', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -37,6 +37,6 @@ export default {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('AccessDefinations');
+    await queryInterface.dropTable('AccessDefinitions');
   }
 };

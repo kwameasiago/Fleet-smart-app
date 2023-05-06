@@ -11,13 +11,13 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      AccessControl.belongsTo(models.AccessDefinations, {foreignKey: 'definationId'});
+      AccessControl.belongsTo(models.AccessDefinitions, {foreignKey: 'definitionId'});
       AccessControl.belongsTo(models.Accounts, {foreignKey: 'accountId'});
     }
   }
   AccessControl.init({
     accountId: DataTypes.INTEGER,
-    definationId: DataTypes.INTEGER,
+    definitionId: DataTypes.INTEGER,
     status: DataTypes.BOOLEAN,
   }, {
     sequelize,
