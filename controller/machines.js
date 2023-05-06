@@ -40,7 +40,6 @@ machineRoute.get('/:machineId', async (req, res) => {
         const data = await getMachine(machineId);
         res.status(200).send(data)
     } catch (error) {
-        console.log(error)
         res.status(500).send({
             errorMsg: 'unable to create  machine',
             error

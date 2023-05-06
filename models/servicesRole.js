@@ -3,7 +3,7 @@
 import {Model} from 'sequelize';
 
 export default (sequelize, DataTypes) => {
-  class Services extends Model {
+  class ServicesRole extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -11,20 +11,17 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Services.belongsTo(models.Machines, {foreignKey: 'MachineId'});
-      Services.belongsTo(models.Parts, {foreignKey: 'PartId'});
-      Services.hadMany(models.ServicesRoles, {foreignKey: 'servicesId'});
+      ServicesRole.belongsTo(models.Services, {foreignKey: 'servicesId'});
     }
   }
-  Services.init({
+  ServicesRole.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     isDelete: DataTypes.BOOLEAN,
-    MachineId: DataTypes.INTEGER,
-    PartId: DataTypes.INTEGER,
+    servicesId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Services',
   });
-  return Services;
+  return ServicesRole;
 };

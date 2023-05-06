@@ -12,6 +12,7 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       User.belongsTo(models.Accounts, {foreignKey: 'accountId'});
+      User.hasMany(models.UserService, {foreignKey: 'userId'})
     }
   }
   User.init({

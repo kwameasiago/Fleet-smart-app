@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('Services', {
+    await queryInterface.createTable('ServicesRole', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,19 +21,11 @@ export default {
         type: Sequelize.STRING,
         allowNull: true
       },
-      MachineId: {
+      servicesId: {
         type: Sequelize.INTEGER,
         allowNull: true,
         references: {
-          model: 'Machines',
-          key: 'id'
-        }
-      },
-      PartId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Parts',
+          model: 'Services',
           key: 'id'
         }
       },
@@ -48,6 +40,6 @@ export default {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('Services');
+    await queryInterface.dropTable('ServicesRole');
   }
 };
