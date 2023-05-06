@@ -65,13 +65,13 @@ class Aim {
             const access = await db.AccessControl.bulkCreate(res);
             
 
-            const {dataValues:superUser} = await db.User.create({
+            const {dataValues:{firstName, lastName, email}} = await db.User.create({
                 ...user,
                 password: await bcrypt.hash(user.password, 10),
                 accountId: accounts[0].id
             })
 
-            const {firstName, lastName, email} = user;
+            
             let token = await jsonwebtoken.sign({ firstName, lastName, email}, process.env.SECRET_KEY, { expiresIn: '7d' });
 
             res = { token}
