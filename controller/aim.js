@@ -1,5 +1,6 @@
 import express from 'express';
 import Aim from '../services/aim';
+import {isAuthenticated} from '../services/utils';
 
 const aimRoute = express.Router();
 const {
@@ -42,7 +43,7 @@ aimRoute.post('/authenticate', async (req, res) => {
 });
 
 
-aimRoute.get('/user/:userId', async (req, res) => {
+aimRoute.get('/user/:userId', isAuthenticated, async (req, res) => {
     const {params:{userId}} = req;
     try {
         const data = await getUser(userId)
@@ -55,7 +56,7 @@ aimRoute.get('/user/:userId', async (req, res) => {
     }
 })
 
-aimRoute.post('/account', async (req, res) => {
+aimRoute.post('/account', isAuthenticated, async (req, res) => {
     const {body:{name, description}} = req;
     try {
         const data = await createAccount(name, description)
@@ -69,7 +70,7 @@ aimRoute.post('/account', async (req, res) => {
 })
 
 
-aimRoute.get('/account', async (req, res) => {
+aimRoute.get('/account', isAuthenticated,async (req, res) => {
     const {body:{name, description}} = req;
     try {
         const data = await getAccounts(name, description)
@@ -83,7 +84,7 @@ aimRoute.get('/account', async (req, res) => {
 });
 
 
-aimRoute.put('/account', async (req, res) => {
+aimRoute.put('/account', isAuthenticated,async (req, res) => {
     const {body:{status, accountType, accountDefinitions}} = req;
     try {
         const data = await updateAccessControl({status, accountType, accountDefinitions})
@@ -98,7 +99,7 @@ aimRoute.put('/account', async (req, res) => {
 });
 
 
-aimRoute.post('/user', async (req, res) => {
+aimRoute.post('/user', isAuthenticated,async (req, res) => {
     const {body} = req;
     try {
         const data = await createUser(body)
@@ -112,7 +113,7 @@ aimRoute.post('/user', async (req, res) => {
     }
 });
 
-aimRoute.get('/user', async (req, res) => {
+aimRoute.get('/user', isAuthenticated ,async (req, res) => {
     try {
         const data = await getUsers()
         res.status(200).send({data})
@@ -127,4 +128,4 @@ aimRoute.get('/user', async (req, res) => {
 
 
 
-export default aimRoute
+export default aimRoute 
