@@ -48,7 +48,7 @@ machineRoute.get('/:machineId', accessControl('view machines'),async (req, res) 
 });
 
 
-machineRoute.post('/parts',accessControl('view parts'),async (req, res) => {
+machineRoute.post('/parts',accessControl('create parts'),async (req, res) => {
     try {
         const {body} = req;
         const data = await addParts(body);
