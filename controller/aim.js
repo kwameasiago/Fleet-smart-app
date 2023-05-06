@@ -2,7 +2,16 @@ import express from 'express';
 import Aim from '../services/aim';
 
 const aimRoute = express.Router();
-const {activateFleetAccount, login, getUser, createAccount, getAccounts, updateAccessControl, createUser} = new Aim();
+const {
+    activateFleetAccount, 
+    login, 
+    getUser, 
+    createAccount, 
+    getAccounts, 
+    updateAccessControl, 
+    createUser,
+    getUsers
+} = new Aim();
 
 aimRoute.post('/activate', async (req, res) => {
     const {body} = req
@@ -93,6 +102,19 @@ aimRoute.post('/user', async (req, res) => {
     const {body} = req;
     try {
         const data = await createUser(body)
+        res.status(200).send({data})
+    } catch (error) {
+        console.log(error)
+        res.status(500).send({
+            errorMsg: 'unable to update access control',
+            error
+        })
+    }
+});
+
+aimRoute.get('/user', async (req, res) => {
+    try {
+        const data = await getUsers()
         res.status(200).send({data})
     } catch (error) {
         console.log(error)

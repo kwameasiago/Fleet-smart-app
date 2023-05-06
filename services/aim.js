@@ -119,8 +119,22 @@ class Aim {
     async getUser(id){
         try {
             const user = await db.User.findAll({ 
-                include: { all: true, nested: true }, 
+                include: [{ all: true, nested: true }], 
                 where: {id},
+                attributes: {exclude: ['password']},
+            });
+            return user
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getUsers(){
+        try {
+            const user = await db.User.findAll({ 
+                include: {
+                    model: db.Accounts
+                },
                 attributes: {exclude: ['password']},
             });
             return user
