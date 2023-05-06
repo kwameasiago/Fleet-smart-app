@@ -171,6 +171,15 @@ class Aim {
             throw error
         }
     }
+    
+    async createUser(data){
+        try {
+            const user = await db.User.create(data);
+            return user
+        } catch (error) {
+            throw error
+        }
+    }
 }
 
 export default Aim;
