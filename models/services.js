@@ -18,7 +18,10 @@ export default (sequelize, DataTypes) => {
   Services.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    isDelete: DataTypes.BOOLEAN,
+    isDelete:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     MachineId: DataTypes.INTEGER,
     PartId: DataTypes.INTEGER,
   }, {

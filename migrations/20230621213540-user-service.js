@@ -13,14 +13,6 @@ export default {
         type: Sequelize.BOOLEAN,
         allowNull: false
       },
-      name: {
-        type: Sequelize.STRING,
-        allowNull: false
-      },
-      description: {
-        type: Sequelize.STRING,
-        allowNull: true
-      },
       servicesId: {
         type: Sequelize.INTEGER,
         allowNull: true,

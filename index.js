@@ -3,6 +3,7 @@ import bodyparser from 'body-parser'
 import userRoute from "./controller/auth.js";
 import aimRoute from './controller/aim.js';
 import machineRoute from './controller/machines.js';
+import serviceRouter from './controller/services.js';
 import db from './models/index.js';
 import cors from 'cors';
 
@@ -23,6 +24,7 @@ app.use('/auth', userRoute);
 
 app.use('/aim', aimRoute);
 app.use('/machine', machineRoute)
+app.use('/service', serviceRouter)
 
 app.use((req, res) => {
     res.status(404).send({

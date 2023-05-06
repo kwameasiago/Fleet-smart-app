@@ -17,8 +17,6 @@ export default (sequelize, DataTypes) => {
     }
   }
   UserService.init({
-    name: DataTypes.STRING,
-    description: DataTypes.STRING,
     isDelete:{
       type: DataTypes.BOOLEAN,
       defaultValue: false
