@@ -12,14 +12,24 @@ export default (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       UserService.belongsTo(models.Services, {foreignKey: 'servicesId'});
-      UserService.belongsTo(models.User, {foreignKey: 'User'})
+      UserService.belongsTo(models.User, {foreignKey: 'userId'});
+      UserService.belongsTo(models.ServicesRoles, {foreignKey: 'servicesRolesId'})
     }
   }
   UserService.init({
     name: DataTypes.STRING,
     description: DataTypes.STRING,
-    isDelete: DataTypes.BOOLEAN,
+    isDelete:{
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    },
     servicesId: DataTypes.INTEGER,
+    servicesRolesId: DataTypes.INTEGER,
+    userId: DataTypes.INTEGER,
+    status: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false
+    }
   }, {
     sequelize,
     modelName: 'UserService',

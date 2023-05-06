@@ -2,7 +2,7 @@
 /** @type {import('sequelize-cli').Migration} */
 export default {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('ServicesRole', {
+    await queryInterface.createTable('ServicesRoles', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -21,14 +21,6 @@ export default {
         type: Sequelize.STRING,
         allowNull: true
       },
-      servicesId: {
-        type: Sequelize.INTEGER,
-        allowNull: true,
-        references: {
-          model: 'Services',
-          key: 'id'
-        }
-      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -40,6 +32,6 @@ export default {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('ServicesRole');
+    await queryInterface.dropTable('ServicesRoles');
   }
 };

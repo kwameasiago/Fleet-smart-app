@@ -36,6 +36,18 @@ const accountDefinitionsdefinitions = [
     },
 ]
 
+const service_roles = [
+    {
+        name: 'reviewer',
+        description: 'approve/reject service'
+    },
+    {
+        name: 'asignee',
+        description: 'Responsible for the service'
+    },
+
+]
+
 class Aim {
     /**
      * Activates new account
@@ -47,7 +59,8 @@ class Aim {
             const {activationKey:key, user} = data
         let res = [];
         if(activationKey === key){
-            const accountDefinitions = await db.AccessDefinitions.bulkCreate(accountDefinitionsdefinitions)
+            const accountDefinitions = await db.AccessDefinitions.bulkCreate(accountDefinitionsdefinitions);
+             await db.ServicesRoles.bulkCreate(service_roles)
             const accounts = await db.Accounts.bulkCreate([
                 {
                     name: 'super user',

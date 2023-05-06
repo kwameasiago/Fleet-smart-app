@@ -37,6 +37,18 @@ export default {
           key: 'id'
         }
       },
+      servicesRolesId: {
+        type: Sequelize.INTEGER,
+        allowNull: true,
+        references: {
+          model: 'ServicesRoles',
+          key: 'id'
+        }
+      },
+      status: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

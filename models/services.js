@@ -13,7 +13,6 @@ export default (sequelize, DataTypes) => {
       // define association here
       Services.belongsTo(models.Machines, {foreignKey: 'MachineId'});
       Services.belongsTo(models.Parts, {foreignKey: 'PartId'});
-      Services.hadMany(models.ServicesRoles, {foreignKey: 'servicesId'});
     }
   }
   Services.init({
