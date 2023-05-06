@@ -11,7 +11,7 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      Services.belongsTo(models.Machines, {foreignKey: 'machineId'});
+      Services.belongsTo(models.Machines, {foreignKey: 'MachineId'});
       Services.belongsTo(models.Parts, {foreignKey: 'PartId'});
     }
   }
@@ -19,8 +19,8 @@ export default (sequelize, DataTypes) => {
     name: DataTypes.STRING,
     description: DataTypes.STRING,
     isDelete: DataTypes.BOOLEAN,
-    machineId: DataTypes.INTEGER,
-    partId: DataTypes.INTEGER,
+    MachineId: DataTypes.INTEGER,
+    PartId: DataTypes.INTEGER,
   }, {
     sequelize,
     modelName: 'Services',

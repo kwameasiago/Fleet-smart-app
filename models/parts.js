@@ -11,8 +11,8 @@ export default (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-        Parts.belongsTo(models.Machines, {foriegnKey: 'partId'});
-        Parts.hasMany(models.Services, {foriegnKey: 'partId'});
+        Parts.belongsTo(models.Machines, {foriegnKey: 'MachineId'});
+        Parts.hasMany(models.Services, {foriegnKey: 'PartId'});
     }
   }
   Parts.init({
@@ -20,8 +20,11 @@ export default (sequelize, DataTypes) => {
     make: DataTypes.STRING,
     model: DataTypes.STRING,
     identifier: DataTypes.STRING,
-    isDelete: DataTypes.BOOLEAN,
-    machineId: DataTypes.INTEGER
+    isDelete: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+     },
+     MachineId: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'Parts',

@@ -47,7 +47,7 @@ class Aim {
             const {activationKey:key, user} = data
         let res = [];
         if(activationKey === key){
-            const accountDefinitions = await db.AccessDefinitions.bulkCreate(definitions)
+            const accountDefinitions = await db.AccessDefinitions.bulkCreate(accountDefinitionsdefinitions)
             const accounts = await db.Accounts.bulkCreate([
                 {
                     name: 'super user',

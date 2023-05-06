@@ -21,7 +21,7 @@ export default {
         type: Sequelize.STRING,
         allowNull: true
       },
-      machineId: {
+      MachineId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
@@ -29,7 +29,7 @@ export default {
           key: 'id'
         }
       },
-      partId: {
+      PartId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {

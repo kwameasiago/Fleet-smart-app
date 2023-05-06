@@ -25,7 +25,7 @@ export default {
         type: Sequelize.STRING,
         allowNull: true
       },
-      machineId: {
+      MachineId: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
