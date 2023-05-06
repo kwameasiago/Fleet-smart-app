@@ -37,6 +37,11 @@ const definitions = [
 ]
 
 class Aim {
+    /**
+     * Activates new account
+     * @param {Object} data 
+     * @returns Object
+     */
     async activateFleetAccount(data){
         try {
             const {activationKey:key, user} = data
@@ -80,6 +85,45 @@ class Aim {
             res  = []
         }
         return res
+        } catch (error) {
+            throw error
+        }
+    }
+
+
+    async login(userData){
+        const { email, password: plainPassword } = userData;
+        try {
+            let user = await db.User.findOne({
+                where: {email}
+            });
+            if(!user){
+                return {token: '', error: 'invalide credentials'}
+            }
+            const {dataValues:{password, firstName, lastName, email:useEmail}} = user
+
+            let compare  = await bcrypt.compare(plainPassword, password);
+            let token;
+            if(compare){
+                token = {token: await jsonwebtoken.sign({ firstName, lastName, useEmail}, process.env.SECRET_KEY, { expiresIn: '7d' })}
+            }else{
+                
+                token = {token: '', error: 'invalide credentials'}
+            }
+            return token
+        } catch (error) {
+            throw error
+        }
+    }
+
+    async getUser(id){
+        try {
+            const user = await db.User.findAll({ 
+                include: { all: true, nested: true }, 
+                where: {id},
+                attributes: {exclude: ['password']},
+            });
+            return user
         } catch (error) {
             throw error
         }
